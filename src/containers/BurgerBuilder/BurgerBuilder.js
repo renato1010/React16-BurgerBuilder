@@ -52,12 +52,19 @@ class BurgerBuilder extends Component {
     });
   };
   render() {
+    const enabledButtons = {
+      salad: this.state.ingredients.salad > 0,
+      bacon: this.state.ingredients.bacon > 0,
+      cheese: this.state.ingredients.cheese > 0,
+      meat: this.state.ingredients.meat > 0
+    };
     return (
       <Aux>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
+          enabledBtns = {enabledButtons}
         />
       </Aux>
     );
