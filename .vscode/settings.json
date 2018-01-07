@@ -1,0 +1,6 @@
+{
+  "editor.lineNumbers": "off",
+  "workbench.colorCustomizations": {
+    "editorError.foreground": "#000"
+  }
+}

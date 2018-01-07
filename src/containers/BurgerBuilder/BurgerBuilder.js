@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -18,7 +20,8 @@ class BurgerBuilder extends Component {
       cheese: 2,
       meat: 2
     },
-    totalPrice: 4
+    totalPrice: 8.6,
+    showOrderModal: false
   };
 
   addIngredientHandler = type => {
@@ -43,28 +46,43 @@ class BurgerBuilder extends Component {
       [type]: updatedQty
     };
     const updatedPrice =
-      oldQty >= 1
-        ? this.state.totalPrice - INGREDIENT_PRICES[type]
-        : this.state.totalPrice;
+      oldQty >= 1 ? this.state.totalPrice - INGREDIENT_PRICES[type] : this.state.totalPrice;
     this.setState({
       ingredients: updatedIngredients,
       totalPrice: updatedPrice
     });
   };
+
+  showOrderModalHandler() {
+    this.setState({ showOrderModal: true });
+  }
   render() {
     const enabledButtons = {
       salad: this.state.ingredients.salad > 0,
       bacon: this.state.ingredients.bacon > 0,
       cheese: this.state.ingredients.cheese > 0,
-      meat: this.state.ingredients.meat > 0
+      meat: this.state.ingredients.meat > 0,
+      order:
+        this.state.ingredients.salad +
+          this.state.ingredients.bacon +
+          this.state.ingredients.cheese +
+          this.state.ingredients.meat >
+        0
     };
+
     return (
       <Aux>
+        <Modal show={this.state.showOrderModal}>
+          <OrderSummary ingredients={this.state.ingredients} />
+        </Modal>
+
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
-          enabledBtns = {enabledButtons}
+          enabledBtns={enabledButtons}
+          price={this.state.totalPrice}
+          showOrderBtn={() => this.showOrderModalHandler()}
         />
       </Aux>
     );
