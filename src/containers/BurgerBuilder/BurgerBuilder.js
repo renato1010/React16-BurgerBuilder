@@ -56,6 +56,9 @@ class BurgerBuilder extends Component {
   showOrderModalHandler() {
     this.setState({ showOrderModal: true });
   }
+  purchaseCancelHandler = () => {
+    this.setState({ showOrderModal: false });
+  };
   render() {
     const enabledButtons = {
       salad: this.state.ingredients.salad > 0,
@@ -72,7 +75,7 @@ class BurgerBuilder extends Component {
 
     return (
       <Aux>
-        <Modal show={this.state.showOrderModal}>
+        <Modal show={this.state.showOrderModal} bdDismiss={this.purchaseCancelHandler}>
           <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
 
