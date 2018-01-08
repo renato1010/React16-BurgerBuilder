@@ -1,7 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 # IDE'S
 .idea
-.vsconfig
+.vscode
 # dependencies
 /node_modules
 
