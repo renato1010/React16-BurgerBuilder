@@ -12,7 +12,10 @@ const controls = [
 const buildControls = props => (
   <div className={classes.BuildControls}>
     <p>
-      Current Price: <strong>{props.price.toFixed(2)}</strong>
+      Current Price:
+      <strong style={{ fontWeight: 'bold', fontSize: '1.6rem' }}>
+        {props.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+      </strong>
     </p>
     {controls.map(ctrl => (
       <BuildControl

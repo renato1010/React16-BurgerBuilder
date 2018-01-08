@@ -13,7 +13,12 @@ const orderSummary = props => {
   });
   return (
     <Aux>
-      <h3>Your Order</h3>
+      <h3>
+        Your Order:{' '}
+        <span style={{ fontWeight: 'bold', fontSize: '1.8rem', color: '#ef5a23' }}>
+          {props.totalPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+        </span>
+      </h3>
       <p>A delicious burger with the following ingredients:</p>
       <ul style={{ listStyle: 'none' }}>{ingredientsSummary}</ul>
       <p>Continue to Checkout?</p>
